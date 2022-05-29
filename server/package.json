@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "ts-node-dev --exit-child --transpile-only src/index.ts",
-    "migrate": "npx prisma dev --name"
+    "migrate": "npx prisma migrate dev --name"
   },
   "devDependencies": {
     "@types/crypto-js": "^4.1.1",

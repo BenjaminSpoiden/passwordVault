@@ -39,7 +39,7 @@ export const CreateServer = () => {
             logger.error(error)
             process.exit(1)
         }
-
+        //@ts-ignore
         req.user = user
     })
 

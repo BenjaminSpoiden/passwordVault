@@ -11,7 +11,21 @@ datasource db {
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
+  uuid       String   @id @unique @default(uuid())
+  email      String   @unique
+  name       String?
+  passsword  String
+  vaults     Vault[]
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+model Vault {
+  id         Int      @id @default(autoincrement())
+  user       User     @relation(fields: [user_id], references: [uuid])
+  user_id    String
+  data       String?
+  salt       String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 }
