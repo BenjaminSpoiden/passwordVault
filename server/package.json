@@ -5,13 +5,16 @@
   "author": "Benjamin Spoiden",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev --exit-child --transpile-only src/index.ts"
+    "dev": "ts-node-dev --exit-child --transpile-only src/index.ts",
+    "migrate": "npx prisma dev --name"
   },
   "devDependencies": {
     "@types/crypto-js": "^4.1.1",
     "@types/lodash": "^4.14.182",
+    "@types/node": "^17.0.36",
     "pino-pretty": "^7.6.1",
     "pretty-print": "^2.0.0",
+    "prisma": "^3.14.0",
     "ts-node-dev": "^2.0.0",
     "typescript": "^4.7.2"
   },
@@ -19,13 +22,12 @@
     "@fastify/cookie": "^6.0.0",
     "@fastify/cors": "^7.0.0",
     "@fastify/jwt": "^5.0.1",
-    "@typegoose/typegoose": "^9.8.1",
+    "@prisma/client": "^3.14.0",
     "argon2": "^0.28.5",
     "crypto-js": "^4.1.1",
     "fastify": "^3.29.0",
     "fastify-zod": "^1.0.0-rc10",
     "lodash": "^4.17.21",
-    "mongoose": "^6.3.4",
     "pino": "^7.11.0",
     "zod": "^3.17.3"
   }
