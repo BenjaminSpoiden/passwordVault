@@ -1,10 +1,10 @@
 
-interface PromiseHandlerInterface {
-    data?: any,
+interface PromiseHandlerInterface<T> {
+    data?: T,
     error?: any
 }
 
-export const handler = <T extends any> (promiseCallback: Promise<T>): Promise<PromiseHandlerInterface> => {
+export const handler = <T> (promiseCallback: Promise<T>): Promise<PromiseHandlerInterface<T>> => {
     return promiseCallback.then(data => {
         return {
             data,
