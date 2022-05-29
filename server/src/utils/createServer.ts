@@ -10,6 +10,12 @@ import { logger } from "./logger"
 import { UserRoute } from "../modules/user/user.route"
 import { VaultRoute } from "../modules/vault/vault.route"
 
+declare module "fastify" {
+    export interface FastifyInstance {
+        authenticate: any
+    }
+}
+
 export const CreateServer = () => {
     const app = fastify()
 
@@ -31,7 +37,7 @@ export const CreateServer = () => {
 
     app.register(fastifyCookie)
 
-    app.decorate("Auth", async (req: FastifyRequest, reply: FastifyReply) => {
+    app.decorate("authenticate", async (req: FastifyRequest, reply: FastifyReply) => {
         const { data: user, error } = await handler(req.jwtVerify<{
             _id: string
         }>())

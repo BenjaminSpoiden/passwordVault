@@ -1,5 +1,5 @@
 import { FastifyError, FastifyInstance, FastifyPluginOptions } from "fastify";
-import { getUsersHandler, registerUserHandler } from "./user.controller";
+import { getUsersHandler, loginHander, registerUserHandler } from "./user.controller";
 
 export const UserRoute = (
     app: FastifyInstance, 
@@ -8,5 +8,6 @@ export const UserRoute = (
     ) => {
         app.post('/', registerUserHandler)
         app.get('/', getUsersHandler)
+        app.post('/login', loginHander)
         done()
 }

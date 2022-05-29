@@ -11,7 +11,7 @@ interface RegisterUserInterface {
 }
 
 export const generateSalt = () => crypto.randomBytes(64).toString('hex')
-
+const generateHash = async (password: string) => await argon2.hash(password)
 
 export const registerUser = async (userInput: RegisterUserInterface) => {
     const {data: hashedPassword, error} = await handler(argon2.hash(userInput.password))
@@ -33,3 +33,25 @@ export const registerUser = async (userInput: RegisterUserInterface) => {
 export const getUsers = async () => {
     return await handler(prismaClient.user.findMany())
 }
+
+
+
+export const findUser = async ({email, hashedPassword}: {email: string, hashedPassword: string}) => {
+    const user = await prismaClient.user.findUnique({
+        where: {
+            email
+        }
+    })
+
+    const {data: hash, error} = await handler(generateHash(hashedPassword))
+
+    if (!hash) {
+        return null
+    }
+    
+    if (!user || !argon2.verify(user.passsword, hash)) {
+        logger.info(`user: ${user}, password: ${hash}`)
+        return null
+    }
+    return user
+}   
